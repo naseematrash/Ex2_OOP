@@ -96,7 +96,7 @@ public class Ex2_1 {
 
     public static void main(String[] args) throws Exception {
         Ex2_1 n = new Ex2_1();
-        String[] fileNames = Ex2_1.createTextFiles(20, 200, 100);
+        String[] fileNames = Ex2_1.createTextFiles(4, 200, 100);
 
         long startTime = System.nanoTime();
         int totalLines = n.getNumOfLinesThreadPool(fileNames);
