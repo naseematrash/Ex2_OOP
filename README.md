@@ -2,6 +2,15 @@
 
 <h1> EX2_1 <h1>
   
+<h3> explanation about what we did in this part :   
+
+making a number of text files and sum the number of lines in these files.
+
+We're going to do this 3 times in 3 different methods.
+- without threads
+- using threads
+- using Threadpool
+  
   
    <h2> explaining the part 5 in the first part of the assignment
    which is about threads and why it might be faster or slower 
