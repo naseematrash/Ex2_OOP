@@ -40,13 +40,17 @@
   
  ----------------------------------------------------
  
- ![](images/Screenshot%202023-01-09%20at%2022.00.37.png)
-  
-----------------------------------------------------
+    
+    
+ ![](images/Screenshot%202023-01-09%20at%2022.00.37.png)  
+ ![](images/Screenshot%202023-01-09%20at%2022.01.35.png) 
+ ![](images/Screenshot%202023-01-09%20at%2022.02.01.png)
 
-![](Screenshot%202023-01-09%20at%2022.01.35.png)
-
-
-----------------------------------------------------
-
-![](Screenshot%202023-01-09%20at%2022.02.01.png)
+    
+    
+  <h2> now our conclusion <h2>
+    
+    as we see here is 4 examples that proof our explanation that 
+    sometimes using threads may be more demanding to our cpu
+    and we can see also that using threadpool is far more superior 
+    and efficient that using Multithreading 
