@@ -54,3 +54,8 @@
     sometimes using threads may be more demanding to our cpu
     and we can see also that using threadpool is far more superior 
     and efficient that using Multithreading 
+
+
+and before we end the part one and move on the part 2 
+of the assignment we wanna add the UML diagram 
+![](Ex2/src/Ex2_1/UML_PART1.png)
