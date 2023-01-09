@@ -59,3 +59,59 @@
 and before we end the part one and move on the part 2 
 of the assignment we wanna add the UML diagram 
 ![](Ex2/src/Ex2_1/UML_PART1.png)
+
+
+
+
+
+<h1> Ex2_2 <h1>
+  
+<h3>
+The proposed design for the Task and CustomExecutor classes contributes to the 
+flexibility, performance, and maintainability of the code in the following ways:
+<h3>
+
+- Flexibility: 
+      
+      
+      The Task class allows users to create tasks that may return a value of any type,
+      and may throw an exception if unable to compute the result.
+      This allows users to create a wide variety of tasks with different functionality.
+
+      
+      The CustomExecutor class allows users to submit tasks to be executed asynchronously,
+      either as a Task object, or as an operation that may return a value and optionally a TaskType.
+      This allows users to submit tasks in a way that is most convenient for their use case.
+      
+      
+      
+- Performance:
+
+      
+      The CustomExecutor class uses a ThreadPoolExecutor to execute tasks asynchronously,
+      which can improve the performance of the application by allowing tasks to be executed concurrently.
+      
+      
+      The CustomExecutor class uses a PriorityBlockingQueue to store the tasks,
+      which allows tasks to be ordered according to their priority.
+      This can improve the performance of the application by allowing tasks with higher priority to be executed before tasks with lower priority.
+      
+
+
+- Maintainability:
+
+      
+      The Task class is designed to be used with the CustomExecutor class,
+      which makes it easier to understand how the two classes work together and how they should be used.
+      
+      
+      The CustomExecutor class is designed to be easy to use and understand,
+      with clear method names and well-defined behavior. This makes it easier to maintain and modify the code in the future.
+      
+      The CustomExecutor class is designed to be thread-safe,
+      which makes it easier to use in a multithreaded environment without causing race conditions or other synchronization issues.
+      This helps to improve the maintainability of the code,
+      as it reduces the risk of introducing bugs due to concurrency issues.
+      
+      
+      
