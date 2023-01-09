@@ -75,6 +75,16 @@ of the assignment we wanna add the UML diagram
 
 <h1> Ex2_2 <h1>
   
+  
+<h3>
+in this part we want to solve this problem : 
+
+  In java, we cannot give a priority to an asynchronous task,
+  java give the programmer the option to give a priority to thread,
+  but not to the task in the thread. That's why we need to make an object which    
+  represent asynchronous task with a priority and also a kind of ThreadPool which support in tasks with priority.  
+  
+  <h3>
 <h3>
 The proposed design for the Task and CustomExecutor classes contributes to the 
 flexibility, performance, and maintainability of the code in the following ways:
