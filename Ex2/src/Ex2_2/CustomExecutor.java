@@ -24,21 +24,42 @@ public class CustomExecutor {
                 corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, queue);
     }
 
+
+    /**
+     * creating a new ThreadPoolExecutor with the Recurments that was asked for
+     */
     public static CustomExecutor create() {
         return new CustomExecutor();
     }
 
+
+    /**
+     * Submits a task to the ThreadPoolExecutor.
+     * @param task  A Task to execute.
+     * @return a Future representing pending completion of the task.
+     */
     public <T> Future<T> submit(Task<T> task) {
         updateMaxPriority(task);
         return executor.submit(task);
     }
 
+    /**
+     * Submits a task to the ThreadPoolExecutor, without priority.
+     * @param operation A Task to execute.
+     * @return a Future representing pending completion of the task.
+     */
     public <T> Future<T> submit(Callable<T> operation) {
         Task<T> task = Task.createTask(operation);
         updateMaxPriority(task);
         return executor.submit(task);
     }
 
+    /**
+     * Submits a task to the ThreadPoolExecutor, with given priority.
+     * @param operation  A Task to execute.
+     * @param taskType TaskType object that represents the priority of the task.
+     * @return a Future representing pending completion of the task.
+     */
     public <T> Future<T> submit(TaskType taskType, Callable<T> operation) {
         Task<T> task = Task.createTask(operation, taskType);
         updateMaxPriority(task);

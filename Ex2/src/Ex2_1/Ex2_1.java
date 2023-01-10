@@ -6,6 +6,13 @@ import java.util.concurrent.*;
 
 public class Ex2_1 {
 
+    /**
+     * Creates text files with random number of lines.
+     * @param n Number of files to create.
+     * @param seed  starting seed for number of lines.
+     * @param bound max number of lines in every file.
+     * @return an array with the names of the files created.
+     */
     public static String[] createTextFiles(int n, int seed, int bound) {
 
         String[] fileNames = new String[n];
@@ -26,7 +33,11 @@ public class Ex2_1 {
 
     }
 
-
+    /**
+     * Reads the number of lines of given array of text files
+     * @param fileNames array that contains the file names.
+     * @return number of total lines read.
+     */
     public static int getNumOfLines(String[] fileNames) {
 
         int totalLines = 0;
@@ -44,7 +55,11 @@ public class Ex2_1 {
         return totalLines;
     }
 
-
+    /**
+     * Reads the number of lines of given array of text files using threads
+     * @param fileNames array that contains the file names.
+     * @return number of total lines read.
+     */
     public int getNumOfLinesThreads(String[] fileNames) {
 
         int totalLines = 0;
@@ -69,7 +84,12 @@ public class Ex2_1 {
         return totalLines;
     }
 
-
+    /**
+     * Reads the number of lines of given array of text files,using a thread pool
+     * @param fileNames array that contains the file names.
+     * @return number of total lines read.
+     * @throws ExecutionException , InterruptedException
+     */
     public int getNumOfLinesThreadPool(String[] fileNames) throws ExecutionException, InterruptedException {
 
         int numOfCores = Runtime.getRuntime().availableProcessors();

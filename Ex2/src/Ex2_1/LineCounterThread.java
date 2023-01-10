@@ -12,6 +12,9 @@ public class LineCounterThread implements Runnable{
         this.fileName = fileName;
     }
 
+    /**
+     * it counts the number of lines the file has
+     * */
     public void run() {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             while (br.readLine() != null) {

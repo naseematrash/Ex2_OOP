@@ -11,10 +11,21 @@ public class Task<T> implements Callable<T>, Comparable<Task<T>> {
         this.operation = operation;
     }
 
+    /**
+     * Creates a new task, with default priority.
+     * @param operation  Callable method of task
+     * @return a Task object of any type.
+     */
     public static <T> Task<T> createTask(Callable<T> operation) {
         return new Task<>(TaskType.OTHER, operation);
     }
 
+    /**
+     * Creates a new task with priority
+     * @param operation  Callable method of task to do.
+     * @param taskType Task priority.
+     * @return a Task object of any type
+     */
     public static <T> Task<T> createTask(Callable<T> operation, TaskType taskType) {
         return new Task<>(taskType, operation);
     }
@@ -32,11 +43,27 @@ public class Task<T> implements Callable<T>, Comparable<Task<T>> {
         return taskType;
     }
 
+    /**
+     * Compares the priority of this task to other task's priority.  Returns a
+     * negative integer, zero, or a positive integer as the priority of
+     * this task is less than, equal to, or greater than the specified priority
+     * of other task's.
+     *
+     * @param other the other task that we are comparing to.
+     *
+     * @return a negative integer, zero, or a positive integer as the priority of
+     * this task is less than, equal to, or greater than the specified priority
+     * of other task's.
+     *
+     */
     @Override
     public int compareTo(Task<T> other) {
         return Integer.compare(getPriorityValue(), other.getPriorityValue());
     }
 }
+
+
+
 
 
 //

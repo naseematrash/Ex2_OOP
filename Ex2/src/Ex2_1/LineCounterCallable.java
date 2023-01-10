@@ -12,6 +12,11 @@ public class LineCounterCallable implements Callable<Integer> {
         this.fileName = fileName;
     }
 
+    /**
+     * The call method
+     * @return  number of lines read from the file
+     * @throws  Exception if there is any error
+     * */
     public Integer call() throws Exception {
         int lines = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
