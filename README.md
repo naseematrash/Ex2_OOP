@@ -137,4 +137,4 @@ flexibility, performance, and maintainability of the code in the following ways:
 <h1> UML Ex2_2 <h1>
   
   
-  ![](Ex2/src/Ex2_2/UML_PART2.png)
+  ![](Ex2/src/Ex2_2/UML_P2.png)
