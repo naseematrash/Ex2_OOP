@@ -15,35 +15,42 @@ public class Ex2_1 {
      */
     public static String[] createTextFiles(int n, int seed, int bound) {
 
-        String[] fileNames = new String[n];
+        String[] filenames = new String[n];
         Random random = new Random(seed);
+
         for (int i = 0; i < n; i++) {
-            int numLines = random.nextInt(bound);
+            int numlines = random.nextInt(bound);
             String fileName = "file" + i + ".txt";
-            fileNames[i] = fileName;
-            try (FileWriter fw = new FileWriter(new File(fileName))) {
-                for (int j = 0; j < numLines; j++) {
-                    fw.write("hello world\n");
+            filenames[i] = fileName;
+
+            try {
+                FileWriter writing = new FileWriter(fileName) ;
+                for (int j = 0; j < numlines; j++) {
+                    writing.write("hello world\n");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return fileNames;
+        return filenames;
 
     }
 
     /**
      * Reads the number of lines of given array of text files
-     * @param fileNames array that contains the file names.
+     * @param filenames array that contains the file names.
      * @return number of total lines read.
      */
-    public static int getNumOfLines(String[] fileNames) {
+    public static int getNumOfLines(String[] filenames) {
 
         int numoflines = 0;
-        for (String fileName : fileNames) {
-            try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
+        for (String fileName : filenames) {
+
+            try {
                 int lines = 0;
+                BufferedReader br = new BufferedReader(new FileReader(fileName)) ;
+
                 while (br.readLine() != null) {
                     lines++;
                 }
@@ -53,58 +60,60 @@ public class Ex2_1 {
             }
         }
         return numoflines;
+
     }
 
     /**
      * Reads the number of lines of given array of text files using threads
-     * @param fileNames array that contains the file names.
+     * @param filenames array that contains the file names.
      * @return number of total lines read.
      */
-    public int getNumOfLinesThreads(String[] fileNames) {
+    public int getNumOfLinesThreads(String[] filenames) {
 
         int numoflines = 0;
-        LineCounterThread[] counters = new LineCounterThread[fileNames.length];
-        Thread[] threads = new Thread[fileNames.length];
-        for (int i = 0; i < fileNames.length; i++) {
-            counters[i] = new LineCounterThread(fileNames[i]);
-            threads[i] = new Thread(counters[i]);
+        LineCounterThread[] threadcount = new LineCounterThread[filenames.length];
+        Thread[] threads = new Thread[filenames.length];
+        for (int i = 0; i < filenames.length; i++) {
+            threadcount[i] = new LineCounterThread(filenames[i]);
+            threads[i] = new Thread(threadcount[i]);
             threads[i].start();
 
         }
 
-        for (int i = 0; i < fileNames.length; i++) {
+        for (int i = 0; i < filenames.length; i++) {
             try {
                 threads[i].join();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            numoflines += counters[i].lines;
+            numoflines =numoflines+ threadcount[i].lines;
         }
         return numoflines;
     }
 
     /**
      * Reads the number of lines of given array of text files,using a thread pool
-     * @param fileNames array that contains the file names.
+     * @param filenames array that contains the file names.
      * @return number of total lines read.
      * @throws ExecutionException , InterruptedException
      */
-    public int getNumOfLinesThreadPool(String[] fileNames) throws ExecutionException, InterruptedException {
+    public int getNumOfLinesThreadPool(String[] filenames) throws ExecutionException, InterruptedException {
 
         int numOfCores = Runtime.getRuntime().availableProcessors();
         int corePoolSize = numOfCores/2;
         int maxPoolSize = numOfCores-1;
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(corePoolSize,maxPoolSize, 500, TimeUnit.MILLISECONDS, new ArrayBlockingQueue(fileNames.length));
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(corePoolSize,maxPoolSize, 500, TimeUnit.MILLISECONDS, new ArrayBlockingQueue(filenames.length));
         int numoflines = 0;
         @SuppressWarnings("unchecked")
-        Future<Integer>[] results = new Future[fileNames.length];
-        for (int i = 0; i < fileNames.length; i++) {
-            results[i] = threadPool.submit(new LineCounterCallable(fileNames[i]));
+        Future<Integer>[] dawait = new Future[filenames.length];
+        for (int i = 0; i < filenames.length; i++) {
+            LineCounterCallable a = new LineCounterCallable(filenames[i]);
+            dawait[i] = threadPool.submit(a);
         }
 
-        for (int i = 0; i < fileNames.length; i++) {
-            numoflines += results[i].get();
+        for (int i = 0; i < filenames.length; i++) {
+            numoflines =numoflines+ dawait[i].get();
         }
         threadPool.shutdown();
         return numoflines;
@@ -113,27 +122,27 @@ public class Ex2_1 {
 
     public static void main(String[] args) throws Exception {
         Ex2_1 n = new Ex2_1();
-        String[] fileNames = Ex2_1.createTextFiles(10, 2, 20);
+        String[] filenames = Ex2_1.createTextFiles(100, 2, 100);
 
         long startTime = System.nanoTime();
-        int numoflines = n.getNumOfLinesThreadPool(fileNames);
+        int numoflines = n.getNumOfLinesThreadPool(filenames);
         long endTime = System.nanoTime();
-        long duration = endTime - startTime;
-        System.out.println("sumThreadspool : " + duration + " nanoseconds");
+        long time = endTime - startTime;
+        System.out.println("Threadspool : " + time + " nanoseconds");
 
         startTime = System.nanoTime();
-        numoflines = Ex2_1.getNumOfLines(fileNames);
+        numoflines = Ex2_1.getNumOfLines(filenames);
         endTime = System.nanoTime();
-        duration = endTime - startTime;
-        System.out.println("sumnormal : " + duration + " nanoseconds");
+        time = endTime - startTime;
+        System.out.println("normal : " + time + " nanoseconds");
 
 
 
         startTime = System.nanoTime();
-        numoflines = n.getNumOfLinesThreads(fileNames);
+        numoflines = n.getNumOfLinesThreads(filenames);
         endTime = System.nanoTime();
-        duration = endTime - startTime;
-        System.out.println("sumThreads : " + duration + " nanoseconds");
+        time = endTime - startTime;
+        System.out.println("Threads : " + time + " nanoseconds");
     }
 
 }
