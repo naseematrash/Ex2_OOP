@@ -19,7 +19,8 @@ public class LineCounterCallable implements Callable<Integer> {
      * */
     public Integer call() throws Exception {
         int lines = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try {
+        BufferedReader br = new BufferedReader(new FileReader(fileName)) ;
             while (br.readLine() != null) {
                 lines++;
             }
