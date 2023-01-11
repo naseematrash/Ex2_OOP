@@ -11,16 +11,15 @@ public class CustomExecutor {
     private final ExecutorService executor;
     private final PriorityBlockingQueue<Runnable> queue;
     private int maxPriority;
-    int numProcessors,corePoolSize,maximumPoolSize;
-    long keepAliveTime;
+
 
 
 
     public CustomExecutor() {
-         numProcessors = Runtime.getRuntime().availableProcessors();
-         corePoolSize = numProcessors / 2;
-         maximumPoolSize = numProcessors - 1;
-         keepAliveTime = 300;
+         int numProcessors = Runtime.getRuntime().availableProcessors();
+         int corePoolSize = numProcessors / 2;
+         int maximumPoolSize = numProcessors - 1;
+        long  keepAliveTime = 300;
         TimeUnit timeUnit = TimeUnit.MILLISECONDS;
         queue = new PriorityBlockingQueue<>();
         executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, queue);

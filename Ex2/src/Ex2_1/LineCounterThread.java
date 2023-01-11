@@ -3,6 +3,7 @@ package Ex2_1;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class LineCounterThread implements Runnable{
     String fileName;
@@ -16,12 +17,12 @@ public class LineCounterThread implements Runnable{
      * it counts the number of lines the file has
      * */
     public void run() {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            while (br.readLine() != null) {
-                lines++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Scanner scanner = new Scanner(fileName);
+        while (scanner.hasNextLine()) {
+            lines++;
+            scanner.nextLine();
         }
+        scanner.close();
     }
+
 }

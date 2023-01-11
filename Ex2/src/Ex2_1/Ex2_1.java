@@ -20,11 +20,11 @@ public class Ex2_1 {
 
         for (int i = 0; i < n; i++) {
             int numlines = random.nextInt(bound);
-            String fileName = "file" + i + ".txt";
-            filenames[i] = fileName;
+            String ftxt = "file" + i + ".txt";
+            filenames[i] = ftxt;
 
             try {
-                FileWriter writing = new FileWriter(fileName) ;
+                FileWriter writing = new FileWriter(ftxt) ;
                 for (int j = 0; j < numlines; j++) {
                     writing.write("hello world\n");
                 }
@@ -45,11 +45,12 @@ public class Ex2_1 {
 
         int numoflines = 0;
 
-        for (String fileName : filenames) {
+        for (int i=0;i<filenames.length;i++) {
 
             try {
                 int lines = 0;
-                BufferedReader br = new BufferedReader(new FileReader(fileName)) ;
+                String ftxt= filenames[i];
+                BufferedReader br = new BufferedReader(new FileReader(ftxt)) ;
 
                 while (br.readLine() != null) {
                     lines++;
@@ -71,8 +72,10 @@ public class Ex2_1 {
     public int getNumOfLinesThreads(String[] filenames) {
 
         int numoflines = 0;
+
         LineCounterThread[] threadcount = new LineCounterThread[filenames.length];
         Thread[] threads = new Thread[filenames.length];
+
         for (int i = 0; i < filenames.length; i++) {
             threadcount[i] = new LineCounterThread(filenames[i]);
             threads[i] = new Thread(threadcount[i]);
@@ -107,7 +110,9 @@ public class Ex2_1 {
         int numoflines = 0;
         @SuppressWarnings("unchecked")
         Future<Integer>[] dawait = new Future[filenames.length];
+
         for (int i = 0; i < filenames.length; i++) {
+
             LineCounterCallable a = new LineCounterCallable(filenames[i]);
             dawait[i] = threadPool.submit(a);
         }
@@ -122,7 +127,7 @@ public class Ex2_1 {
 
     public static void main(String[] args) throws Exception {
         Ex2_1 n = new Ex2_1();
-        String[] filenames = Ex2_1.createTextFiles(100, 2, 100);
+        String[] filenames = Ex2_1.createTextFiles(10, 2, 100);
 
         long startTime = System.nanoTime();
         int numoflines = n.getNumOfLinesThreadPool(filenames);
