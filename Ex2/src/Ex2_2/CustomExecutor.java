@@ -12,7 +12,7 @@ public class CustomExecutor {
 
     private int maxPriority;
 
-    private final PriorityBlockingQueue<Runnable> queue;
+    private final PriorityBlockingQueue<Runnable> blockingqueue;
 
 
     public CustomExecutor() {
@@ -21,8 +21,8 @@ public class CustomExecutor {
          int maximumPoolSize = numProcessors - 1;
         long  keepAliveTime = 300;
         TimeUnit timeUnit = TimeUnit.MILLISECONDS;
-        queue = new PriorityBlockingQueue<>();
-        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, queue);
+        blockingqueue = new PriorityBlockingQueue<>();
+        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, blockingqueue);
     }
 
 
