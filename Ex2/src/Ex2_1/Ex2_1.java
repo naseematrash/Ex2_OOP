@@ -72,39 +72,6 @@ public class Ex2_1 {
 
     }
 
-    /**
-     * Reads the number of lines of given array of text files using threads
-     * @param fileNames array that contains the file names.
-     * @return number of total lines read.
-     */
-    public int getNumOfLinesThreads(String[] fileNames) {
-
-        Thread[] t = new Thread[fileNames.length];
-        LineCounterThread[] threadcount = new LineCounterThread[fileNames.length];
-
-        int numoflines = 0;
-
-        for (int i = 0; i < fileNames.length; i++) {
-
-            threadcount[i] = new LineCounterThread(fileNames[i]);
-            t[i] = new Thread(threadcount[i]);
-            t[i].start();
-
-        }
-
-        for (int i = 0; i < fileNames.length; i++) {
-
-            try {
-                t[i].join();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            numoflines =numoflines+ threadcount[i].lines;
-        }
-        return numoflines;
-    }
 
     /**
      * Reads the number of lines of given array of text files,using a thread pool
@@ -136,6 +103,40 @@ public class Ex2_1 {
         }
 
         tp.shutdown();
+        return numoflines;
+    }
+
+    /**
+     * Reads the number of lines of given array of text files using threads
+     * @param fileNames array that contains the file names.
+     * @return number of total lines read.
+     */
+    public int getNumOfLinesThreads(String[] fileNames) {
+
+        Thread[] t = new Thread[fileNames.length];
+        LineCounterThread[] threadcount = new LineCounterThread[fileNames.length];
+
+        int numoflines = 0;
+
+        for (int i = 0; i < fileNames.length; i++) {
+
+            threadcount[i] = new LineCounterThread(fileNames[i]);
+            t[i] = new Thread(threadcount[i]);
+            t[i].start();
+
+        }
+
+        for (int i = 0; i < fileNames.length; i++) {
+
+            try {
+                t[i].join();
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            numoflines =numoflines+ threadcount[i].lines;
+        }
         return numoflines;
     }
 
