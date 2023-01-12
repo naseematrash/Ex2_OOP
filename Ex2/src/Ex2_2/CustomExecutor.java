@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomExecutor {
     private final ExecutorService executor;
-    private final PriorityBlockingQueue<Runnable> queue;
+
     private int maxPriority;
 
-
+    private final PriorityBlockingQueue<Runnable> queue;
 
 
     public CustomExecutor() {

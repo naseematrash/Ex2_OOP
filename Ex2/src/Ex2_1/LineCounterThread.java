@@ -1,23 +1,23 @@
 package Ex2_1;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.Scanner;
 
 public class LineCounterThread implements Runnable{
-    String fileName;
-    int lines;
 
-    public LineCounterThread(String fileName) {
-        this.fileName = fileName;
+    int lines;
+    String fn;
+
+
+    public LineCounterThread(String fn) {
+        this.fn = fn;
     }
 
     /**
      * it counts the number of lines the file has
      * */
     public void run() {
-        Scanner scanner = new Scanner(fileName);
+        Scanner scanner = new Scanner(fn);
         while (scanner.hasNextLine()) {
             lines++;
             scanner.nextLine();

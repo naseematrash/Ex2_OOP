@@ -1,16 +1,13 @@
 package Ex2_1;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.Callable;
 
 public class LineCounterCallable implements Callable<Integer> {
-    String fileName;
+    String fn;
 
-    public LineCounterCallable(String fileName) {
-        this.fileName = fileName;
+    public LineCounterCallable(String fn) {
+        this.fn = fn;
     }
 
     /**
@@ -18,13 +15,15 @@ public class LineCounterCallable implements Callable<Integer> {
      * @return  number of lines read from the file
      * @throws  Exception if there is any error
      * */
-    public Integer call() throws Exception {
-        int lines = 0;
-        Scanner scanner = new Scanner(fileName);
+    public Integer call() {
+
+        Scanner scanner = new Scanner(fn);
+        int count = 0;
+
         while (scanner.hasNextLine()) {
-            lines++;
+            count++;
             scanner.nextLine();
         }
-        return lines;
+        return count;
     }
 }
